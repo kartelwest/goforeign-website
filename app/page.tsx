@@ -49,8 +49,7 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4">
-            <a href="#contact" 
-             className="rounded-full bg-[#C99A2E] px-8 py-4 text-lg font-bold text-black shadow-xl shadow-yellow-500/30 transition-all duration-300 hover:scale-105 hover:bg-yellow-300">
+            <a href="#contact" className="rounded-full bg-[#B8860B] px-8 py-4 text-lg font-bold text-black shadow-xl shadow-[#B8860B]/30 transition-all duration-300 hover:-translate-y-1 hover:bg-[#D4A017] hover:shadow-[#D4A017]/50">
               Book a Consultation ↗
             </a>
             <a href="#services" className="rounded-full border border-white/40 px-8 py-4 font-bold">
