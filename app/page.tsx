@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
       <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-10 py-5">
-        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-14 w-auto"
-/>
+        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-16 w-auto" //original was h14 but i made it a bit bigger
+        />
 
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
