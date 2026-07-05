@@ -24,7 +24,7 @@ export default function Home() {
           <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
         </div>
 
-        <a href="#contact" className="rounded-full bg-yellow-400 px-6 py-3 font-bold text-black">
+        <a href="#contact" className="rounded-full bg-[#C99A2E] px-6 py-3 font-bold text-black hover:bg-[#D6A93A]">
           Book Consultation
         </a>
       </nav>
@@ -36,12 +36,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/25"></div>
 
         <div className="relative z-10 max-w-2xl mt-16">
-          <p className="mb-5 font-bold tracking-[0.25em] text-yellow-400">
+          <p className="mb-5 font-bold tracking-[0.25em] text-[#C99A2E]">
             LIVE BIGGER. LIVE ABROAD.
           </p>
 
           <h2 className="mb-6 text-6xl font-black leading-tight md:text-7xl">
-            Your New Life <br /> Starts Here<span className="text-yellow-400">.</span>
+            Your New Life <br /> Starts Here<span className="text-[#C99A2E]">.</span>
           </h2>
 
           <p className="mb-8 max-w-xl text-xl leading-relaxed text-gray-200">
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10 flex items-center gap-4">
-            <div className="text-yellow-400 text-2xl">★★★★★</div>
+            <div className="text-[#C99A2E] text-2x1">★★★★★</div>
             <p className="text-sm text-gray-200">Trusted by clients in 10+ countries</p>
           </div>
         </div>
@@ -68,14 +68,14 @@ export default function Home() {
       <section id="services" className="bg-zinc-950 px-10 py-16">
         <div className="grid gap-10 lg:grid-cols-4">
           <div>
-            <p className="mb-4 font-bold tracking-widest text-yellow-400">WHAT WE DO</p>
+            <p className="mb-4 font-bold tracking-widest text-[#C99A2E]">WHAT WE DO</p>
             <h3 className="mb-6 text-4xl font-black">
               Services That Make Your Move Easier
             </h3>
             <p className="text-gray-400">
               From planning to execution, we help you build your dream life abroad with confidence.
             </p>
-            <div className="mt-8 h-1 w-24 bg-yellow-400"></div>
+            <div className="mt-8 h-1 w-24 bg-[#C99A2E]"></div>
           </div>
 
           <div className="grid gap-4 lg:col-span-3 md:grid-cols-3">
