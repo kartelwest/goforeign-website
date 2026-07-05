@@ -17,7 +17,7 @@ export default function Home() {
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
           <a href="#services" className="hover:text-[#F2C14E]">Services</a>
-          <a href="#gallery" className="hover:text-[#F2C14E]">Gallery</a>
+          <a href="#lifestyle" className="hover:text-[#F2C14E]">Lifestyle</a>
           <a href="#testimonials" className="hover:text-[#F2C14E]">Testimonials</a>
           <a href="#about" className="hover:text-[#F2C14E]">About</a>
           <a href="#pricing" className="hover:text-[#F2C14E]">Pricing</a>
@@ -88,6 +88,56 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section id="lifestyle" className="bg-black px-10 py-24 text-white">
+  <div className="mx-auto max-w-7xl">
+    <div className="mb-14 max-w-3xl">
+      <p className="mb-4 font-bold uppercase tracking-[0.3em] text-[#C99A2E]">
+        Lifestyle
+      </p>
+      <h2 className="text-5xl font-black">
+        This is not a vacation. This is a new way to live.
+      </h2>
+      <p className="mt-6 text-lg leading-relaxed text-gray-300">
+        Brazil gives you beauty, energy, culture, nightlife, beaches, food, and connection.
+        Go Foreign helps you step into the lifestyle without moving blindly.
+      </p>
+    </div>
+
+    <div className="grid gap-6 md:grid-cols-3">
+      {[
+        ["/lifestyle/rio1.jpeg", "Christ the Redeemer", "Wake up surrounded by one of the most iconic views in the world."],
+        ["/lifestyle/rio2.jpeg", "Sugarloaf Mountain", "Ocean, mountains, cable cars, and the skyline that makes Rio unforgettable."],
+        ["/lifestyle/rio3.jpeg", "Vidigal Views", "See Rio from above and understand the energy of the hillside communities."],
+        ["/lifestyle/rio4.jpeg", "Lapa Nights", "Music, nightlife, history, street energy, and the famous arches after dark."],
+        ["/lifestyle/rio5.jpeg", "Copacabana Beach", "The beach, the boardwalk, the lights, and the rhythm of everyday Rio life."],
+        ["/lifestyle/rio6.jpeg", "Golf & Coastal Living", "Green space, ocean air, city views, and a lifestyle built around freedom."],
+      ].map(([image, title, text]) => (
+        <div
+          key={title}
+          className="group relative h-96 overflow-hidden rounded-3xl border border-[#C99A2E]/20 bg-zinc-950 shadow-xl"
+        >
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+          <div className="absolute bottom-0 p-8">
+            <h3 className="mb-3 text-2xl font-bold text-[#C99A2E]">
+              {title}
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-200">
+              {text}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
     </main>
   );
 }
