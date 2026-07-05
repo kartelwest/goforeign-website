@@ -14,14 +14,14 @@ export default function Home() {
         <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-14 w-auto"
 />
 
-        <div className="hidden gap-8 text-lg font-medium md:flex">
+        <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
-          <a href="#services" className="hover:text-yellow-400">Services</a>
-          <a href="#gallery" className="hover:text-yellow-400">Gallery</a>
-          <a href="#testimonials" className="hover:text-yellow-400">Testimonials</a>
-          <a href="#about" className="hover:text-yellow-400">About</a>
-          <a href="#pricing" className="hover:text-yellow-400">Pricing</a>
-          <a href="#contact" className="hover:text-yellow-400">Contact</a>
+          <a href="#services" className="hover:text-[#F2C14E]">Services</a>
+          <a href="#gallery" className="hover:text-[#F2C14E]">Gallery</a>
+          <a href="#testimonials" className="hover:text-[#F2C14E]">Testimonials</a>
+          <a href="#about" className="hover:text-[#F2C14E]">About</a>
+          <a href="#pricing" className="hover:text-[#F2C14E]">Pricing</a>
+          <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
         </div>
 
         <a href="#contact" className="rounded-full bg-yellow-400 px-6 py-3 font-bold text-black">
