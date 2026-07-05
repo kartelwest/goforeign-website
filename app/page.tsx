@@ -108,7 +108,7 @@ export default function Home() {
       {[
         ["/lifestyle/rio1.jpeg", "Christ the Redeemer", "Wake up surrounded by one of the most iconic views in the world."],
         ["/lifestyle/rio2.jpeg", "Sugarloaf Mountain", "Ocean, mountains, cable cars, and the skyline that makes Rio unforgettable."],
-        ["/lifestyle/rio3.jpeg", "Vidigal Views", "See Rio from above and understand the energy of the hillside communities."],
+        ["/lifestyle/rio3.jpeg", "Vidigal Views", "See Rio from above and understand the energy of the favela communities where the beers just keep coming."],
         ["/lifestyle/rio4.jpeg", "Lapa Nights", "Music, nightlife, history, street energy, and the famous arches after dark."],
         ["/lifestyle/rio5.jpeg", "Copacabana Beach", "The beach, the boardwalk, the lights, and the rhythm of everyday Rio life."],
         ["/lifestyle/rio6.jpeg", "Golf & Coastal Living", "Green space, ocean air, city views, and a lifestyle built around freedom."],
