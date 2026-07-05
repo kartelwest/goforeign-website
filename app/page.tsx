@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#6E5318] bg-[#080808]/95 px-10 py-5 backdrop-blur-md">
+      <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-10 py-5">
         <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-14 w-auto"
 />
 
