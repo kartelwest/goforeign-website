@@ -35,7 +35,7 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-black/25"></div>
 
-        <div className="relative z-10 max-w-2xl mt-16">
+        <div className="relative z-10 max-w-2xl mt-16 animate-fade-up">
           <p className="mb-5 font-bold tracking-[0.25em] text-[#C99A2E]">
             LIVE BIGGER. LIVE ABROAD.
           </p>
