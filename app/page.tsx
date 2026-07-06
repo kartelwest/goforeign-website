@@ -27,6 +27,9 @@ export default function Home() {
           <a href="#pricing" className="hover:text-[#F2C14E]">Pricing</a>
           <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
           
+
+        </div>
+
           <button
            className="block md:hidden text-[#C99A2E] z-50"
            onClick={() => setMenuOpen(!menuOpen)}
@@ -47,7 +50,6 @@ export default function Home() {
   </svg>
 </button>
 
-        </div>
 
         <a
          href="#contact"
