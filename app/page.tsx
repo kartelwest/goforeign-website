@@ -10,9 +10,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-10 py-5">
-        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-16 w-auto" //original was h14 but i made it a bit bigger
-        />
+     <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-4 py-4 md:px-10 md:py-5"></nav> <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-10 py-5">
+        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-12 w-auto md:h-16" />
 
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
@@ -24,9 +23,12 @@ export default function Home() {
           <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
         </div>
 
-        <a href="#contact" className="rounded-full bg-[#C99A2E] px-6 py-3 font-bold text-black hover:bg-[#D6A93A]">
-          Book Consultation
-        </a>
+        <a
+         href="#contact"
+         className="hidden rounded-full bg-[#B8860B] px-6 py-3 font-bold text-black transition-all duration-300 hover:bg-[#D4A017] md:inline-flex"
+        >
+        Book Consultation
+      </a>
       </nav>
 
       <section
