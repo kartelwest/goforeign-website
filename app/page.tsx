@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const services = [
     ["🌎", "Relocation Planning", "Step-by-step guidance to help you move abroad with clarity."],
     ["💼", "Marketing & Branding", "Build your personal or business brand and grow your presence."],
@@ -10,7 +15,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-     <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-4 py-4 md:px-10 md:py-5"></nav> <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-10 py-5">
+      <nav className="fixed top-0 z-50 flex w-full items-center justify-between bg-black/80 px-10 py-6 backdrop-blur-md">
         <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-12 w-auto md:h-16" />
 
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
@@ -21,6 +26,27 @@ export default function Home() {
           <a href="#about" className="hover:text-[#F2C14E]">About</a>
           <a href="#pricing" className="hover:text-[#F2C14E]">Pricing</a>
           <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
+          
+          <button
+           className="md:hidden text-[#C99A2E]"
+           onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+</button>
+
         </div>
 
         <a
