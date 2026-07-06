@@ -15,8 +15,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <nav className="fixed top-0 z-50 flex w-full items-center justify-between bg-black/80 px-10 py-6 backdrop-blur-md">
-        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-12 w-auto md:h-16" />
+      <nav className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-[#3B2B09] bg-black px-4 py-4 md:px-10 md:py-5">
+        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-10 w-auto md:h-16" />
 
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
@@ -28,7 +28,7 @@ export default function Home() {
           <a href="#contact" className="hover:text-[#F2C14E]">Contact</a>
           
           <button
-           className="md:hidden text-[#C99A2E]"
+           className="block md:hidden text-[#C99A2E] z-50"
            onClick={() => setMenuOpen(!menuOpen)}
         >
           <svg
