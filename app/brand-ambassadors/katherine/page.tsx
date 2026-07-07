@@ -74,9 +74,9 @@ export default function KatherinePage() {
             alt="Katherine lifestyle photo"
             className="h-80 w-full rounded-2xl object-cover"
           />
-
+          
           <a
-            href="https://your-private-gallery-link.com"
+            href="https://onlyfans.com/thenaughtybrazilteacher"
             target="_blank"
             className="group relative h-80 overflow-hidden rounded-2xl"
           >
