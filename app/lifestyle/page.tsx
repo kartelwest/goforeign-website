@@ -24,16 +24,15 @@ export default function LifestylePage() {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-4 font-bold uppercase tracking-[0.3em] text-[#C99A2E]">
-            Go Foreign Lifestyle
+            LIVE BIGGER. LIVE ABROAD.
           </p>
 
           <h1 className="max-w-5xl text-5xl font-black leading-tight md:text-7xl">
-            Brazil is not just a place you visit. It is a life you step into.
+            What If This Was Home?
           </h1>
 
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-gray-200">
-            Beaches, nightlife, culture, restaurants, music, views, social access,
-            and unforgettable experiences. This is the lifestyle side of Go Foreign.
+          <p className="mt-6 max-w-4xl text-lg leading-relaxed text-gray-200">
+            Every beach, every city, and every experience you see here is more than a destination—it could become your everyday life. Discover the culture, the people, the opportunities, and the unforgettable experiences that make Brazil one of the world's most exciting places to call home. Go Foreign helps you move beyond dreaming about Brazil and start building your future here.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -128,10 +127,6 @@ export default function LifestylePage() {
             <h2 className="text-5xl font-black">
               Brazil has more than one lifestyle.
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-gray-300">
-              Each city gives you a different version of freedom: luxury, nightlife,
-              business, beaches, culture, wellness, romance, and adventure.
-            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -147,29 +142,6 @@ export default function LifestylePage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="px-10 py-24">
-        <div className="mx-auto max-w-7xl rounded-3xl border border-[#C99A2E]/30 bg-[#080808] p-10 text-center">
-          <p className="mb-4 font-bold uppercase tracking-[0.3em] text-[#C99A2E]">
-            Nightlife
-          </p>
-          <h2 className="text-5xl font-black">
-            Lapa is only the beginning.
-          </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-300">
-            Rooftop lounges, samba nights, beach clubs, private events, music,
-            dancing, restaurants, and social introductions. Go Foreign helps you
-            experience Brazil with confidence instead of guessing your way through it.
-          </p>
-
-          <a
-            href="/concierge"
-            className="mt-8 inline-flex rounded-full bg-[#B8860B] px-8 py-4 text-lg font-bold text-black transition hover:bg-[#D4A017]"
-          >
-            Plan Your Nightlife Experience →
-          </a>
         </div>
       </section>
     </main>
