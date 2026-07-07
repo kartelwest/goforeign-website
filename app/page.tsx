@@ -60,15 +60,15 @@ export default function Home() {
           </nav>
 
           {menuOpen && (
-            <div className="fixed top-[72px] left-0 z-40 w-full border-b border-[#3B2B09] bg-black px-6 py-6 md:hidden">
-              <div className="flex flex-col gap-5 text-lg font-semibold text-[#C99A2E]">
-                <a href="#" onClick={() => setMenuOpen(false)}>Home</a>
-                <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-                <a href="#lifestyle" onClick={() => setMenuOpen(false)}>Lifestyle</a>
-                <a href="#testimonials" onClick={() => setMenuOpen(false)}>Testimonials</a>
-                <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-                <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-                <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+            <div className="fixed left-0 top-[72px] z-[9999] w-full border-b border-[#3B2B09] bg-black px-6 py-6 md:hidden">
+    <div className="flex flex-col gap-5 text-lg font-semibold text-[#C99A2E]">
+      <a href="#" onClick={() => setMenuOpen(false)}>Home</a>
+      <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+      <a href="#lifestyle" onClick={() => setMenuOpen(false)}>Lifestyle</a>
+      <a href="#testimonials" onClick={() => setMenuOpen(false)}>Testimonials</a>
+      <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+      <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
               </div>
             </div>
           )}
