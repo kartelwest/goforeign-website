@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+
   const services = [
     ["🌎", "Relocation Planning", "Step-by-step guidance to help you move abroad with clarity."],
     ["💼", "Marketing & Branding", "Build your personal or business brand and grow your presence."],
