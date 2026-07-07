@@ -23,7 +23,7 @@ export default function Home() {
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           <a href="#">Home</a>
           <a href="#services" className="hover:text-[#F2C14E]">Services</a>
-          <a href="#lifestyle" className="hover:text-[#F2C14E]">Lifestyle</a>
+          <a href="/lifestyle" className="hover:text-[#F2C14E]">Lifestyle</a>
           <a href="#testimonials" className="hover:text-[#F2C14E]">Testimonials</a>
           <a href="#about" className="hover:text-[#F2C14E]">About</a>
           <a href="#pricing" className="hover:text-[#F2C14E]">Pricing</a>
@@ -66,7 +66,7 @@ export default function Home() {
     <div className="flex flex-col gap-5 text-lg font-semibold text-[#C99A2E]">
       <a href="#" onClick={() => setMenuOpen(false)}>Home</a>
       <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-      <a href="#lifestyle" onClick={() => setMenuOpen(false)}>Lifestyle</a>
+      <a href="/lifestyle" onClick={() => setMenuOpen(false)}>Lifestyle</a>
       <a href="#testimonials" onClick={() => setMenuOpen(false)}>Testimonials</a>
       <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
       <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
