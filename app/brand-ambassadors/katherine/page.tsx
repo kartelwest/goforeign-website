@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Katherine | Brand Ambassador",
+  description:
+    "Katherine is a Go Foreign Rio Lifestyle Ambassador for events, nightlife, boat parties, and concierge services.",
+  alternates: { canonical: "/brand-ambassadors/katherine" },
+};
 
 export default function KatherinePage() {
   return (
@@ -78,6 +86,7 @@ export default function KatherinePage() {
           <a
             href="https://onlyfans.com/thenaughtybrazilteacher"
             target="_blank"
+            rel="noopener noreferrer"
             className="group relative h-80 overflow-hidden rounded-2xl"
           >
             <img

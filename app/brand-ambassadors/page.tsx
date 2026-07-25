@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Brand Ambassadors",
+  description:
+    "Meet the Go Foreign Brand Ambassadors who provide social introductions, nightlife access, and local lifestyle guidance in Brazil.",
+  alternates: { canonical: "/brand-ambassadors" },
+};
+
 const ambassadors = [
   { name: "Katherine", image: "/ambassadors/katherine.jpeg", slug: "katherine" },
   { name: "Ambassador 2", image: "/ambassadors/placeholder.jpeg", slug: "ambassador-2" },

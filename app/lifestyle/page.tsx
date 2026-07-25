@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lifestyle in Brazil",
+  description:
+    "Explore the Rio de Janeiro and Brazil lifestyle — beaches, nightlife, culture, and cities Go Foreign helps you build a life in.",
+  alternates: { canonical: "/lifestyle" },
+};
+
 const features = [
   ["/lifestyle/rio1.jpeg", "Christ the Redeemer", "history, views, photos, and unforgettable Rio energy", "/lifestyle/christ-the-redeemer"],
   ["/lifestyle/rio2.jpeg", "Sugarloaf Mountain", "cable cars, sunsets, ocean views, and luxury sightseeing", "/lifestyle/sugarloaf"],
@@ -32,7 +41,7 @@ export default function LifestylePage() {
           </h1>
 
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-gray-200">
-            Every beach, every city, and every experience you see here is more than a destination—it could become your everyday life. Discover the culture, the people, the opportunities, and the unforgettable experiences that make Brazil one of the world's most exciting places to call home. Go Foreign helps you move beyond dreaming about Brazil and start building your future here.
+            Every beach, every city, and every experience you see here is more than a destination—it could become your everyday life. Discover the culture, the people, the opportunities, and the unforgettable experiences that make Brazil one of the world&apos;s most exciting places to call home. Go Foreign helps you move beyond dreaming about Brazil and start building your future here.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
