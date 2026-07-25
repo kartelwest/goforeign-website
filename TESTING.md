@@ -157,4 +157,46 @@ create Supabase Auth users for random emails. Not required for security — the
 - Settings screen edits existing services only; adding a brand-new service (new
   duration tier) still needs a manual insert — ask and I'll add a form for it.
 - Calendar is a simple week-list view, not drag-and-drop.
-- Nu Nu nav item is a placeholder — that's Phase 5.
+
+---
+
+# Testing — Phase 5 (Nu Nu)
+
+## Before you can test this
+1. Apply `supabase/migrations/0003_nunu_storage.sql` (creates the private
+   `nunu-uploads` storage bucket — review it first, same as the other migrations).
+2. Set `ANTHROPIC_API_KEY` in `.env.local` (server-side only — never exposed to the
+   browser; verified no secret strings appear in `.next/static` after `npm run build`
+   in this pass).
+
+## What to click / verify
+1. Go to `/admin/nunu`. Try each text command from the build prompt's list:
+   - "Block next Tuesday all day"
+   - "What's on my calendar Thursday?" (should answer directly, no confirm button)
+   - "Move my 2pm Friday to 3pm" (only works if you have a matching appointment —
+     otherwise it should say so rather than guessing)
+   - "Add a note to the Johnson appointment: sent follow-up resources"
+2. For anything that mutates the calendar, confirm you see **Confirm / Dismiss**
+   buttons and nothing happens until you click Confirm — verify by checking
+   `/admin/availability` or `/admin/calendar` before and after.
+3. Try a command that would collide with an existing booked appointment (e.g. block a
+   range that overlaps a confirmed appointment) — confirm it refuses and tells you why
+   instead of silently overwriting.
+4. Upload a schedule photo (JPEG/PNG/HEIC). Confirm you land on an editable review
+   table, not an immediate write — edit a row, delete a row, then click Apply.
+5. Upload something illegible or a non-schedule image — confirm it reports low
+   confidence / an `unclear` note rather than fabricating shifts.
+6. Try uploading an 11MB+ file or a `.pdf` — confirm both are rejected client-side
+   error messages, not silently accepted.
+7. Check the `audit_log` table after a few confirmed actions — each should have a row
+   with `actor_type = 'nunu'` and the actual admin's id as `actor_id`.
+8. Rate limit: send 11 messages within a minute — the 11th should be refused with a
+   friendly rate-limit message rather than erroring.
+
+## Known limitations in this pass
+- "Open a range" only removes blocks **fully contained** in the requested range —
+  a block that only partially overlaps is left alone with a note to adjust it manually
+  in Availability, rather than attempting to split it automatically.
+- `move_appointment` / `add_note` resolve the target appointment by a fuzzy
+  client-name + approximate-date match; if that's ambiguous (0 or 2+ candidates) it
+  asks you to use the Appointments screen instead of guessing.
