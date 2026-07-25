@@ -148,7 +148,22 @@ export interface Database {
           duration_minutes: 20 | 30 | 60;
         };
         Update: Partial<Database["public"]["Tables"]["appointments"]["Row"]>;
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "appointments_client_id_fkey";
+            columns: ["client_id"];
+            isOneToOne: false;
+            referencedRelation: "clients";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "appointments_service_id_fkey";
+            columns: ["service_id"];
+            isOneToOne: false;
+            referencedRelation: "services";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       appointment_notes: {
         Row: {
@@ -166,7 +181,22 @@ export interface Database {
           body: string;
         };
         Update: Partial<Database["public"]["Tables"]["appointment_notes"]["Row"]>;
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "appointment_notes_appointment_id_fkey";
+            columns: ["appointment_id"];
+            isOneToOne: false;
+            referencedRelation: "appointments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "appointment_notes_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "admin_users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       payments: {
         Row: {
@@ -189,7 +219,22 @@ export interface Database {
           method: PaymentMethod;
         };
         Update: Partial<Database["public"]["Tables"]["payments"]["Row"]>;
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "payments_appointment_id_fkey";
+            columns: ["appointment_id"];
+            isOneToOne: false;
+            referencedRelation: "appointments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "payments_client_id_fkey";
+            columns: ["client_id"];
+            isOneToOne: false;
+            referencedRelation: "clients";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       nunu_uploads: {
         Row: {

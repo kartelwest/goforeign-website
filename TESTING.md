@@ -90,6 +90,71 @@ until you:
 
 ## Known limitations in this pass
 - No confirmation/notification emails yet — that's Phase 6 (Resend).
-- No admin backoffice yet to view/manage bookings from your side — that's Phase 4.
-- `/payments` as its own page (with the `PaymentProvider` architecture) is Phase 3;
-  this PR only surfaces the payment message text on the confirmation/review screens.
+
+---
+
+# Testing — Phase 3 (Payments Page)
+
+1. Visit `/payments` — shows the same message as the booking confirmation screen,
+   pulled live from `settings.payments.public_message`.
+2. Confirm your Zelle handle (or any specific payment detail) is **nowhere** on this
+   page or anywhere else public — it's meant to be shared privately after booking.
+3. Read `PAYMENTS.md` for the reasoning and the `PaymentProvider` architecture — this
+   is documentation + a `ManualProvider` implementation, nothing to click yet (the
+   backoffice controls that use it are Phase 4, below).
+
+---
+
+# Testing — Phase 4 (Backoffice)
+
+## Seed your admin user (required before you can log in at all)
+Signing in doesn't require an allowlisted email — anyone can request a magic link.
+What gates access is the `admin_users` table: only an email present there **and**
+`is_active = true` can actually reach `/admin`. Nothing is seeded by the migration, so
+after applying `0001_init.sql`, run this once in the Supabase SQL editor with your real
+email:
+
+```sql
+insert into admin_users (email, display_name, role) values ('you@example.com', 'Your Name', 'owner');
+```
+
+**Recommended extra step**: in Supabase Dashboard → Authentication → Providers → Email,
+turn off "Allow new user signups" (or equivalent) so magic-link requests don't silently
+create Supabase Auth users for random emails. Not required for security — the
+`admin_users` check still blocks them from doing anything — just tidier.
+
+## What to click / verify
+1. Go to `/admin` — should redirect to `/admin/login`.
+2. Enter your seeded email, click "Send sign-in link", check your inbox, click the link.
+   You should land on `/admin/today`.
+3. Try entering an email that's **not** in `admin_users` — you should get sent back to
+   `/admin/login?error=not_authorized` after clicking that link.
+4. **Today** — shows today's appointments (empty until you create one).
+5. **New Appointment** — create one manually. Try a time outside your weekly hours —
+   you should get a warning with a "Book anyway" override, per the build prompt's
+   requirement to allow squeezing someone in. Try booking the exact same slot twice —
+   the second should fail with a conflict error (same DB constraint as the public flow).
+6. **Appointment detail** — change status, record a payment (check it moves to "paid"
+   automatically), add a note, confirm it appears in the notes thread with a timestamp.
+7. **Clients** — search by name/email, open a client, confirm their appointment history
+   shows up.
+8. **Availability** — toggle a day off/on and change hours, save, then check `/book`
+   reflects it (that day's slots disappear/reappear). Add a blackout block — if it
+   overlaps an existing appointment you should get a warning (and the appointment
+   should NOT be silently cancelled — verify it's untouched afterward).
+9. **Settings** — edit a service's name/description/price, save, confirm `/book` shows
+   the updated text.
+10. **Security headers**: `curl -sI https://your-deployed-url/` and confirm
+    `Content-Security-Policy`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
+    and `Strict-Transport-Security` are all present (verified locally against a prod
+    build in this pass — no CSP-related console errors on a headless-browser pass of
+    every public page).
+11. **RLS/service-role check**: confirm `SUPABASE_SERVICE_ROLE_KEY` never appears in
+    any file under `.next/static` after `npm run build` (spot-checked in this pass —
+    grep for it yourself to be sure after you deploy).
+
+## Known limitations in this pass
+- Settings screen edits existing services only; adding a brand-new service (new
+  duration tier) still needs a manual insert — ask and I'll add a form for it.
+- Calendar is a simple week-list view, not drag-and-drop.
+- Nu Nu nav item is a placeholder — that's Phase 5.
