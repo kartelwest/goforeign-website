@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
   ["Home", "/"],
@@ -50,12 +51,12 @@ export default function SiteNav() {
           </svg>
         </button>
 
-        <a
-          href="#contact"
+        <Link
+          href="/book"
           className="hidden rounded-full bg-[#B8860B] px-6 py-3 font-bold text-black transition-all duration-300 hover:bg-[#D4A017] md:inline-flex"
         >
           Book Consultation
-        </a>
+        </Link>
       </nav>
 
       {menuOpen && (
