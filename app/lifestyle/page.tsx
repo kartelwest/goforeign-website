@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Lifestyle in Brazil",
@@ -105,10 +106,12 @@ export default function LifestylePage() {
                 key={title}
                 className="group relative h-96 overflow-hidden rounded-3xl border border-[#C99A2E]/20 bg-zinc-950 shadow-xl"
               >
-                <img
+                <Image
                   src={image}
                   alt={title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>

@@ -1,7 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
+import { sendEmail } from "@/lib/email/resend";
+import { cancellationEmail, rescheduleEmail } from "@/lib/email/templates";
 
 const ERROR_MESSAGES: Record<string, string> = {
   not_found: "We couldn't find that booking.",
@@ -18,6 +20,15 @@ function friendlyError(error: { code?: string; message?: string }): string {
   return ERROR_MESSAGES[error.message ?? ""] ?? ERROR_MESSAGES[error.code ?? ""] ?? "Something went wrong. Please try again.";
 }
 
+async function loadClientAndService(clientId: string, serviceId: string) {
+  const supabase = createServiceRoleClient();
+  const [{ data: client }, { data: service }] = await Promise.all([
+    supabase.from("clients").select("full_name, email").eq("id", clientId).maybeSingle(),
+    supabase.from("services").select("name").eq("id", serviceId).maybeSingle(),
+  ]);
+  return { client, serviceName: service?.name ?? "Consultation" };
+}
+
 export type ManageActionResult = { ok: true } | { ok: false; error: string };
 
 export async function cancelAppointment(token: string, reason: string): Promise<ManageActionResult> {
@@ -26,12 +37,27 @@ export async function cancelAppointment(token: string, reason: string): Promise<
   if (!parsed.success) return { ok: false, error: "Invalid request." };
 
   const supabase = await createServerSupabaseClient();
-  const { error } = await supabase.rpc("cancel_appointment", {
+  const { data, error } = await supabase.rpc("cancel_appointment", {
     p_manage_token: parsed.data.token,
     p_reason: parsed.data.reason || null,
   });
 
   if (error) return { ok: false, error: friendlyError(error) };
+
+  const appointment = Array.isArray(data) ? data[0] : data;
+  if (appointment) {
+    const { client, serviceName } = await loadClientAndService(appointment.client_id, appointment.service_id);
+    if (client) {
+      const email = cancellationEmail({
+        clientName: client.full_name,
+        serviceName,
+        startsAtIso: appointment.starts_at,
+        clientTimezone: appointment.client_timezone,
+      });
+      await sendEmail({ to: client.email, subject: email.subject, html: email.html });
+    }
+  }
+
   return { ok: true };
 }
 
@@ -42,11 +68,28 @@ export async function rescheduleAppointment(token: string, newStartsAtIso: strin
   if (!parsed.success) return { ok: false, error: "Invalid request." };
 
   const supabase = await createServerSupabaseClient();
-  const { error } = await supabase.rpc("reschedule_appointment", {
+  const { data, error } = await supabase.rpc("reschedule_appointment", {
     p_manage_token: parsed.data.token,
     p_new_starts_at: parsed.data.newStartsAtIso,
   });
 
   if (error) return { ok: false, error: friendlyError(error) };
+
+  const appointment = Array.isArray(data) ? data[0] : data;
+  if (appointment) {
+    const { client, serviceName } = await loadClientAndService(appointment.client_id, appointment.service_id);
+    if (client) {
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goforeign.com";
+      const email = rescheduleEmail({
+        clientName: client.full_name,
+        serviceName,
+        newStartsAtIso: appointment.starts_at,
+        clientTimezone: appointment.client_timezone,
+        manageUrl: `${siteUrl}/book/manage/${parsed.data.token}`,
+      });
+      await sendEmail({ to: client.email, subject: email.subject, html: email.html });
+    }
+  }
+
   return { ok: true };
 }

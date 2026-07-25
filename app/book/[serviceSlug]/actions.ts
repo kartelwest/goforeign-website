@@ -1,7 +1,10 @@
 "use server";
 
 import { z } from "zod";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
+import { getBusinessSettings, getPaymentsSettings } from "@/lib/booking/data";
+import { sendEmail } from "@/lib/email/resend";
+import { bookingConfirmationEmail, bookingNotificationEmail } from "@/lib/email/templates";
 
 const bookingSchema = z.object({
   serviceId: z.string().uuid(),
@@ -53,9 +56,70 @@ export async function bookAppointment(input: BookAppointmentInput): Promise<Book
   }
 
   const appointment = Array.isArray(data) ? data[0] : data;
+
+  await sendBookingEmails({
+    serviceId,
+    startsAtIso: appointment.starts_at,
+    fullName,
+    email,
+    phone: phone || null,
+    clientTimezone: timezone,
+    intakeNotes: intakeNotes || null,
+    confirmationCode: appointment.confirmation_code,
+    manageToken: appointment.manage_token,
+  });
+
   return {
     ok: true,
     manageToken: appointment.manage_token,
     confirmationCode: appointment.confirmation_code,
   };
+}
+
+async function sendBookingEmails(params: {
+  serviceId: string;
+  startsAtIso: string;
+  fullName: string;
+  email: string;
+  phone: string | null;
+  clientTimezone: string;
+  intakeNotes: string | null;
+  confirmationCode: string;
+  manageToken: string;
+}) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goforeign.com";
+  const manageUrl = `${siteUrl}/book/manage/${params.manageToken}`;
+
+  const supabase = createServiceRoleClient();
+  const [{ data: service }, business, payments] = await Promise.all([
+    supabase.from("services").select("name").eq("id", params.serviceId).maybeSingle(),
+    getBusinessSettings(),
+    getPaymentsSettings(),
+  ]);
+  const serviceName = service?.name ?? "Consultation";
+
+  const confirmation = bookingConfirmationEmail({
+    clientName: params.fullName,
+    serviceName,
+    startsAtIso: params.startsAtIso,
+    clientTimezone: params.clientTimezone,
+    confirmationCode: params.confirmationCode,
+    manageUrl,
+    paymentMessage: payments.public_message,
+  });
+  await sendEmail({ to: params.email, subject: confirmation.subject, html: confirmation.html });
+
+  const notificationEmail = process.env.NOTIFICATION_EMAIL;
+  if (notificationEmail) {
+    const notification = bookingNotificationEmail({
+      clientName: params.fullName,
+      clientEmail: params.email,
+      clientPhone: params.phone,
+      serviceName,
+      startsAtIso: params.startsAtIso,
+      businessTimezone: business.timezone,
+      intakeNotes: params.intakeNotes,
+    });
+    await sendEmail({ to: notificationEmail, subject: notification.subject, html: notification.html });
+  }
 }

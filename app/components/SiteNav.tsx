@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const links = [
@@ -19,7 +20,14 @@ export default function SiteNav() {
   return (
     <>
       <nav className="fixed top-0 z-50 flex w-full items-center justify-between overflow-hidden border-b border-[#3B2B09] bg-black px-3 py-4 md:px-10 md:py-5">
-        <img src="/go-foreign-logo.png" alt="Go Foreign" className="h-9 w-[240px] object-contain md:h-16 md:w-auto" />
+        <Image
+          src="/go-foreign-logo.png"
+          alt="Go Foreign"
+          width={385}
+          height={70}
+          priority
+          className="h-9 w-[240px] object-contain md:h-16 md:w-auto"
+        />
 
         <div className="hidden gap-8 text-lg font-semibold text-[#C99A2E] md:flex">
           {links.map(([label, href]) => (

@@ -18,6 +18,7 @@ Status column: **Fixed** = fixed in this PR · **Flagged** = needs your decision
 | 3 | 🟠 | "Ambassador 2" is listed twice with the identical slug `ambassador-2` (duplicate array entry). | `app/brand-ambassadors/page.tsx:3-4` | **Flagged** |
 | 4 | 🔴 | 10 of 12 ambassador cards (`ambassador-2` through `ambassador-12`) link to routes with no corresponding `page.tsx` — clicking them 404s. Only `katherine` exists. | `app/brand-ambassadors/*` (missing routes) | **Flagged** |
 | 5 | 🟠 | `/lifestyle` "Explore Concierge Services" CTA links to `/concierge`, which doesn't exist (404). | `app/lifestyle/page.tsx:40` | **Flagged** |
+| 5b | 🟠 | **Found in Phase 6 re-pass, missed in the original audit:** all 6 "Rio Experiences" cards on `/lifestyle` (Christ the Redeemer, Sugarloaf, Vidigal, Lapa, Copacabana, Golf & Coastal Living) link to `/lifestyle/<slug>` detail pages that don't exist — none of `app/lifestyle/*` subroutes were built. Every card 404s. | `app/lifestyle/page.tsx:1-8` | **Flagged** |
 | 6 | 🟠 | WhatsApp CTA on `/brand-ambassadors` links to bare `https://wa.me/` with no phone number — clicking it goes nowhere useful. | `app/brand-ambassadors/page.tsx:144` | **Flagged** |
 | 7 | 🟠 | Katherine's "VIP Access / Private Gallery" thumbnail links out to an OnlyFans account (`onlyfans.com/thenaughtybrazilteacher`) from what's framed as a professional lifestyle-consulting ambassador page. Flagging for a brand/liability call — not something I'll remove or keep without you weighing in. Also missing `rel="noopener noreferrer"` on the `target="_blank"` (reverse-tabnabbing risk, fixed regardless). | `app/brand-ambassadors/katherine/page.tsx:78-95` | **Flagged** |
 | 8 | 🟡 | Nav "Home" link is `href="#"` instead of `/`. | `app/page.tsx:24,67` | Fixed |
@@ -28,9 +29,9 @@ Status column: **Fixed** = fixed in this PR · **Flagged** = needs your decision
 
 | # | Sev | Issue | File:Line | Status |
 |---|-----|-------|-----------|--------|
-| 11 | 🟠 | Every image site-wide uses raw `<img>` instead of `next/image` — no automatic WebP/AVIF, no responsive `srcset`, no built-in lazy-loading, no layout-shift protection from width/height. | all pages | Open (Phase 6 polish — swapping ~25 image tags to `next/image` is mechanical but sizable; flagging rather than doing it silently mid-audit-commit) |
+| 11 | 🟠 | Every image site-wide uses raw `<img>` instead of `next/image` — no automatic WebP/AVIF, no responsive `srcset`, no built-in lazy-loading, no layout-shift protection from width/height. | all pages | Fixed (Phase 6 — all 9 flagged `<img>` tags converted to `next/image`, verified with a headless-browser screenshot pass) |
 | 12 | 🟠 | `globals.css` hardcodes `body { font-family: Arial, Helvetica, sans-serif; }`, which overrides the Geist font Next is optimizing and loading via `next/font` in `layout.tsx`. The optimized font is being loaded but never actually applied. | `app/globals.css:22-26` | Fixed |
-| 13 | 🟡 | No `width`/`height` on any `<img>`, contributing to layout shift on slow connections (compounds with #11). | all pages | Open (resolved once #11 moves to `next/image`, which requires explicit or inferred dimensions) |
+| 13 | 🟡 | No `width`/`height` on any `<img>`, contributing to layout shift on slow connections (compounds with #11). | all pages | Fixed (resolved by the `next/image` migration — explicit `width`/`height` on the logo, `fill` + sized containers elsewhere) |
 
 ## SEO
 
@@ -47,9 +48,9 @@ Status column: **Fixed** = fixed in this PR · **Flagged** = needs your decision
 
 | # | Sev | Issue | File:Line | Status |
 |---|-----|-------|-----------|--------|
-| 20 | 🟡 | No visible custom `:focus-visible` styling — relies on browser default outline, which is inconsistent across browsers on a black background. | site-wide | Open (Phase 6 polish) |
+| 20 | 🟡 | No visible custom `:focus-visible` styling — relies on browser default outline, which is inconsistent across browsers on a black background. | site-wide | Fixed (Phase 6 — added a gold `:focus-visible` ring in `globals.css`) |
 | 21 | 🟢 | `target="_blank"` links missing `rel="noopener noreferrer"`. | `app/brand-ambassadors/katherine/page.tsx:80` | Fixed |
-| 22 | 🟢 | Gold-on-black (`#C99A2E` on `#000`) body text passes AA for large text; verify small body-copy instances (e.g. nav links at default size) against 4.5:1 — spot-checked as passing but worth a full contrast pass once real copy is final. | site-wide | Open (manual re-check, Phase 6) |
+| 22 | 🟢 | Gold-on-black (`#C99A2E` on `#000`) body text passes AA for large text; verify small body-copy instances (e.g. nav links at default size) against 4.5:1 — spot-checked as passing but worth a full contrast pass once real copy is final. | site-wide | Open (needs a real browser contrast audit tool against final copy — flagged in `LAUNCH.md`) |
 
 ## Trust & Conversion
 
@@ -70,9 +71,8 @@ These are content/business calls, not code bugs — I'm not going to silently de
 3. **OnlyFans link (#7)** — keep, remove, or gate differently? I fixed the `rel="noopener noreferrer"` security gap either way, but the link itself is your call.
 4. **`/concierge` page (#5)** and **WhatsApp number (#6)** — build a real `/concierge` page, or point that CTA elsewhere? What's the actual WhatsApp business number for the `wa.me/` link (there's also an unused `public/whatsapp-qr.png` in the repo already — is that the right number)?
 5. **`management@goforeign.com` (#9)** — confirm this is a real, monitored inbox before I leave it live.
+6. **6 dead `/lifestyle/<slug>` detail pages (#5b)** — build real destination pages for each, or point the cards back to `/lifestyle` (or `/book`) instead?
 
-## Medium/Low items deferred to later phases (not blocking)
+## Remaining open item
 
-- `next/image` migration (#11, #13) — mechanical, sizable, scheduled for Phase 6 polish so it doesn't bloat this audit PR.
-- Custom focus-visible styling (#20) and full contrast pass (#22) — Phase 6.
-- OG share image is currently the site logo (`go-foreign-logo.png`) as a placeholder — swap for a proper 1200×630 share card when you have one designed.
+- Full color-contrast audit (#22) against real, final copy — needs a real browser + axe/Lighthouse pass, which I did not have live infrastructure to run end-to-end this session (see `LAUNCH.md`).

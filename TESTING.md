@@ -197,6 +197,37 @@ create Supabase Auth users for random emails. Not required for security — the
 - "Open a range" only removes blocks **fully contained** in the requested range —
   a block that only partially overlaps is left alone with a note to adjust it manually
   in Availability, rather than attempting to split it automatically.
+
+---
+
+# Testing — Phase 6 (Email, .ics, Polish, Launch Checklist)
+
+See `LAUNCH.md` for the full go-live checklist and an honest breakdown of what's
+verified vs. what needs your live environment.
+
+## What to click / verify
+1. Set `RESEND_API_KEY`, `RESEND_FROM_EMAIL` (must be on a domain verified in your
+   Resend account), and `NOTIFICATION_EMAIL` in `.env.local`.
+2. Book a test appointment — confirm you (the client) get a confirmation email, and
+   `NOTIFICATION_EMAIL` gets a new-booking notification.
+3. Cancel it — confirm a cancellation email arrives.
+4. Book another and reschedule it — confirm a reschedule email arrives with the new
+   time and a working "Manage Booking" link.
+5. Without those env vars set, confirm booking/cancel/reschedule still work — email
+   sending should no-op with a console warning, never block or fail the action itself.
+6. Images: spot-check `/`, `/lifestyle`, `/brand-ambassadors`, and
+   `/brand-ambassadors/katherine` — all photos should render via `next/image` now
+   (view source: no more raw `<img>` for site photos except where content is still
+   pending your sign-off in `AUDIT.md`).
+7. Focus states: tab through the site with keyboard only — every interactive element
+   should show a visible gold focus ring.
+
+## Known limitations in this pass
+- Email templates are plain inline-styled HTML, not tested against every email
+  client's rendering quirks (Outlook, Gmail app, etc.) — worth a real send-and-check
+  pass once `RESEND_FROM_EMAIL` is live.
+- No booking reminder emails (e.g. "24 hours before your appointment") — not in the
+  original spec, flagging as a possible future addition.
 - `move_appointment` / `add_note` resolve the target appointment by a fuzzy
   client-name + approximate-date match; if that's ambiguous (0 or 2+ candidates) it
   asks you to use the Appointments screen instead of guessing.

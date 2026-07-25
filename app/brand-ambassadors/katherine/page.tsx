@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -60,11 +61,13 @@ export default function KatherinePage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-zinc-800">
-            <img
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-zinc-800">
+            <Image
               src="/ambassadors/katherine/katherine-main.jpeg"
               alt="Katherine GoForeign Ambassador"
-              className="h-full w-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           </div>
         </div>
@@ -77,22 +80,28 @@ export default function KatherinePage() {
         </p>
 
         <div className="mt-8 grid gap-5 md:grid-cols-4">
-          <img
-            src="/ambassadors/katherine/katherine-1.jpeg"
-            alt="Katherine lifestyle photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
-          
+          <div className="relative h-80 w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/ambassadors/katherine/katherine-1.jpeg"
+              alt="Katherine lifestyle photo"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
+
           <a
             href="https://onlyfans.com/thenaughtybrazilteacher"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative h-80 overflow-hidden rounded-2xl"
           >
-            <img
+            <Image
               src="/ambassadors/katherine/katherine-2.jpeg"
               alt="Katherine private gallery"
-              className="h-full w-full object-cover transition group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover transition group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/45" />
             <div className="absolute bottom-5 left-5">
@@ -103,17 +112,25 @@ export default function KatherinePage() {
             </div>
           </a>
 
-          <img
-            src="/ambassadors/katherine/katherine-3.jpeg"
-            alt="Katherine event photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
+          <div className="relative h-80 w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/ambassadors/katherine/katherine-3.jpeg"
+              alt="Katherine event photo"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
 
-          <img
-            src="/ambassadors/katherine/katherine-4.jpeg"
-            alt="Katherine Rio lifestyle photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
+          <div className="relative h-80 w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/ambassadors/katherine/katherine-4.jpeg"
+              alt="Katherine Rio lifestyle photo"
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

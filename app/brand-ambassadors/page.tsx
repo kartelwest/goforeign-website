@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Brand Ambassadors",
@@ -109,10 +110,12 @@ export default function BrandAmbassadorsPage() {
                 className="group overflow-hidden rounded-3xl border border-[#C99A2E]/20 bg-zinc-950 transition duration-500 hover:-translate-y-2 hover:border-[#C99A2E] hover:shadow-2xl hover:shadow-[#C99A2E]/20"
               >
                 <div className="relative h-[460px] overflow-hidden">
-                  <img
+                  <Image
                     src={ambassador.image}
                     alt={ambassador.name}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition duration-700 group-hover:scale-110"
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
