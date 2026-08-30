@@ -1,11 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Katherine",
+  description:
+    "Katherine is a Go Foreign Rio Lifestyle Ambassador for events, nightlife, boat parties, and concierge experiences.",
+};
 
 export default function KatherinePage() {
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
       <section className="mx-auto max-w-6xl px-6 py-10">
-        <Link href="/" className="text-sm text-yellow-400">
-          ← Back to GoForeign
+        <Link href="/brand-ambassadors" className="text-sm text-yellow-400">
+          ← Back to Brand Ambassadors
         </Link>
 
         <div className="mt-10 grid gap-10 md:grid-cols-2 md:items-center">
@@ -52,11 +60,14 @@ export default function KatherinePage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-zinc-800">
-            <img
-              src="/ambassadors/katherine/katherine-main.jpeg"
-              alt="Katherine GoForeign Ambassador"
-              className="h-full w-full object-cover"
+          <div className="relative h-[420px] overflow-hidden rounded-3xl border border-zinc-800">
+            <Image
+              src="/ambassadors/katherine.jpeg"
+              alt="Katherine, GoForeign Ambassador"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              priority
+              className="object-cover"
             />
           </div>
         </div>
@@ -65,46 +76,36 @@ export default function KatherinePage() {
       <section id="gallery" className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="text-3xl font-bold">Katherine Gallery</h2>
         <p className="mt-3 text-zinc-400">
-          Lifestyle, events, nightlife, and private ambassador content.
+          Lifestyle, events, nightlife, and ambassador content. More photos coming soon.
         </p>
 
         <div className="mt-8 grid gap-5 md:grid-cols-4">
-          <img
-            src="/ambassadors/katherine/katherine-1.jpeg"
-            alt="Katherine lifestyle photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
-          
-          <a
-            href="https://onlyfans.com/thenaughtybrazilteacher"
-            target="_blank"
-            className="group relative h-80 overflow-hidden rounded-2xl"
-          >
-            <img
-              src="/ambassadors/katherine/katherine-2.jpeg"
-              alt="Katherine private gallery"
-              className="h-full w-full object-cover transition group-hover:scale-105"
+          <div className="relative h-80 w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/ambassadors/katherine.jpeg"
+              alt="Katherine lifestyle photo"
+              fill
+              sizes="(min-width: 768px) 25vw, 50vw"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/45" />
-            <div className="absolute bottom-5 left-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-yellow-400">
-                VIP Access
-              </p>
-              <p className="text-2xl font-bold">Private Gallery</p>
+          </div>
+
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="relative h-80 w-full overflow-hidden rounded-2xl bg-zinc-900">
+              <Image
+                src="/ambassadors/placeholder.jpeg"
+                alt="More Katherine photos coming soon"
+                fill
+                sizes="(min-width: 768px) 25vw, 50vw"
+                className="object-cover opacity-60"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                <p className="text-sm font-semibold uppercase tracking-widest text-yellow-400">
+                  Coming Soon
+                </p>
+              </div>
             </div>
-          </a>
-
-          <img
-            src="/ambassadors/katherine/katherine-3.jpeg"
-            alt="Katherine event photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
-
-          <img
-            src="/ambassadors/katherine/katherine-4.jpeg"
-            alt="Katherine Rio lifestyle photo"
-            className="h-80 w-full rounded-2xl object-cover"
-          />
+          ))}
         </div>
       </section>
 
@@ -155,4 +156,4 @@ export default function KatherinePage() {
       </section>
     </main>
   );
-} 
+}

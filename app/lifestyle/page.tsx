@@ -1,10 +1,20 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lifestyle",
+  description:
+    "Discover the Rio de Janeiro lifestyle and beyond — beaches, culture, nightlife, and the cities Go Foreign helps you call home in Brazil.",
+};
+
 const features = [
-  ["/lifestyle/rio1.jpeg", "Christ the Redeemer", "history, views, photos, and unforgettable Rio energy", "/lifestyle/christ-the-redeemer"],
-  ["/lifestyle/rio2.jpeg", "Sugarloaf Mountain", "cable cars, sunsets, ocean views, and luxury sightseeing", "/lifestyle/sugarloaf"],
-  ["/lifestyle/rio3.jpeg", "Vidigal Views", "hilltop views, culture, food, music, and real local perspective", "/lifestyle/vidigal"],
-  ["/lifestyle/rio4.jpeg", "Lapa", "historic arches, street culture, samba, bars, and nightlife energy", "/lifestyle/lapa"],
-  ["/lifestyle/rio5.jpeg", "Copacabana Beach", "beach life, hotels, restaurants, boardwalks, and oceanfront living", "/lifestyle/copacabana"],
-  ["/lifestyle/rio6.jpeg", "Golf & Coastal Living", "green space, ocean air, upscale leisure, and relaxed luxury", "/lifestyle/golf-coastal-living"],
+  ["/lifestyle/rio1.jpeg", "Christ the Redeemer", "history, views, photos, and unforgettable Rio energy"],
+  ["/lifestyle/rio2.jpeg", "Sugarloaf Mountain", "cable cars, sunsets, ocean views, and luxury sightseeing"],
+  ["/lifestyle/rio3.jpeg", "Vidigal Views", "hilltop views, culture, food, music, and real local perspective"],
+  ["/lifestyle/rio4.jpeg", "Lapa", "historic arches, street culture, samba, bars, and nightlife energy"],
+  ["/lifestyle/rio5.jpeg", "Copacabana Beach", "beach life, hotels, restaurants, boardwalks, and oceanfront living"],
+  ["/lifestyle/rio6.jpeg", "Golf & Coastal Living", "green space, ocean air, upscale leisure, and relaxed luxury"],
 ];
 
 const cities = [
@@ -32,23 +42,23 @@ export default function LifestylePage() {
           </h1>
 
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-gray-200">
-            Every beach, every city, and every experience you see here is more than a destination—it could become your everyday life. Discover the culture, the people, the opportunities, and the unforgettable experiences that make Brazil one of the world's most exciting places to call home. Go Foreign helps you move beyond dreaming about Brazil and start building your future here.
+            Every beach, every city, and every experience you see here is more than a destination&mdash;it could become your everyday life. Discover the culture, the people, the opportunities, and the unforgettable experiences that make Brazil one of the world&apos;s most exciting places to call home. Go Foreign helps you move beyond dreaming about Brazil and start building your future here.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="/concierge"
+            <Link
+              href="/#contact"
               className="rounded-full bg-[#B8860B] px-8 py-4 text-lg font-bold text-black transition hover:bg-[#D4A017]"
             >
-              Explore Concierge Services
-            </a>
+              Book a Consultation
+            </Link>
 
-            <a
+            <Link
               href="/brand-ambassadors"
               className="rounded-full border border-[#C99A2E] px-8 py-4 text-lg font-bold text-[#C99A2E] transition hover:bg-[#C99A2E] hover:text-black"
             >
               Meet Brand Ambassadors
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -90,16 +100,17 @@ export default function LifestylePage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {features.map(([image, title, text, link]) => (
-              <a
-                href={link}
+            {features.map(([image, title, text]) => (
+              <div
                 key={title}
                 className="group relative h-96 overflow-hidden rounded-3xl border border-[#C99A2E]/20 bg-zinc-950 shadow-xl"
               >
-                <img
+                <Image
                   src={image}
                   alt={title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
@@ -109,10 +120,10 @@ export default function LifestylePage() {
                     {title}
                   </h3>
                   <p className="text-sm leading-relaxed text-gray-200">
-                    Click to explore {text}.
+                    {text}.
                   </p>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
